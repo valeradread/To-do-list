@@ -22,7 +22,7 @@ export enum NotesCategory {
 
 export enum ActionType {
     ADD_NOTE = 'ADD_NOTE',
-    ARCHIVE_NOTE = 'ARCHIVE_NOTE',
+    TOGGLE_ARCHIVE_NOTE = 'TOGGLE_ARCHIVE_NOTE',
     FLUX_ON_PAGE = 'FLUX_ON_PAGE'
 }
 
@@ -50,10 +50,8 @@ export interface AddNoteAction {
 }
 
 export interface ArchiveNoteAction {
-    type: ActionType.ARCHIVE_NOTE;
-    payload: {
-        id: number;
-    };
+    type: ActionType.TOGGLE_ARCHIVE_NOTE;
+    id: number;
 }
 
 export interface FluxOnPage {

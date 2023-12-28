@@ -101,12 +101,32 @@
     justify-items: center;
 }
 
-.docs_column {
-    display: grid;
-    grid-template-columns: 1fr;
+.icon {
     width: 100%;
-    justify-items: center;
+    margin: 0;
+    padding: 0;
 }
+
+.tools_container{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tool_button{
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.tool_button:active{
+    background-color: #282c34;
+}
+
 
 .param_value_container {
     padding-left: 0.5vw;

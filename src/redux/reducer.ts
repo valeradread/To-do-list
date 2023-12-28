@@ -13,7 +13,7 @@ const initialState: AppState = {
         },
 
         {
-            id: 0,
+            id: 1,
             name: "Pokupki2",
             category: NotesCategory.TASK,
             date_created: "3/5/2021",
@@ -23,7 +23,7 @@ const initialState: AppState = {
         },
 
         {
-            id: 0,
+            id: 2,
             name: "Pokupki3",
             category: NotesCategory.TASK,
             date_created: "3/5/2021",
@@ -33,7 +33,7 @@ const initialState: AppState = {
         },
 
         {
-            id: 0,
+            id: 3,
             name: "Pokupki4",
             category: NotesCategory.TASK,
             date_created: "3/5/2021",
@@ -43,7 +43,7 @@ const initialState: AppState = {
         },
 
         {
-            id: 0,
+            id: 4,
             name: "Pokupki5",
             category: NotesCategory.TASK,
             date_created: "3/5/2021",
@@ -53,7 +53,7 @@ const initialState: AppState = {
         },
 
         {
-            id: 0,
+            id: 5,
             name: "Pokupki6",
             category: NotesCategory.TASK,
             date_created: "3/5/2021",
@@ -63,7 +63,7 @@ const initialState: AppState = {
         },
 
         {
-            id: 0,
+            id: 6,
             name: "Pokupki7",
             category: NotesCategory.TASK,
             date_created: "3/5/2021",
@@ -107,7 +107,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
                 notes: [
                     ...state.notes,
                     {
-                        id: state.notes.length + 1,
+                        id: state.notes[state.notes.length-1].id + 1,
                         name: action.payload.name,
                         category: action.payload.category,
                         date_created: currentDateTimeString,
@@ -127,6 +127,23 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
                     category: action.category,
                     content: action.content
                 }
+            }
+        case ActionType.TOGGLE_ARCHIVE_NOTE:
+            debugger
+            const updatedNotes = state.notes.map((note) => {
+                if (note.id === action.id) {
+                    // Update the specific note
+                    return {
+                        ...note,
+                        archived: !note.archived,
+                    };
+                }
+                return note; // Keep other notes unchanged
+            });
+            return {
+
+                ...state,
+                notes: updatedNotes
             }
 
         // case ActionType.TOGGLE_TODO:
@@ -153,7 +170,9 @@ export const addNoteAC = (
         category: NotesCategory,
         content: string
     }
-) => ({type: ActionType.ADD_NOTE, payload})
+) => ({type: ActionType.ADD_NOTE, payload});
+
+export const toggleArchiveNoteAC = (id: number) => ({type: ActionType.TOGGLE_ARCHIVE_NOTE, id});
 
 export default reducer;
 
