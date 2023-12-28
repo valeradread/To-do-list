@@ -23,7 +23,8 @@ export enum NotesCategory {
 export enum ActionType {
     ADD_NOTE = 'ADD_NOTE',
     TOGGLE_ARCHIVE_NOTE = 'TOGGLE_ARCHIVE_NOTE',
-    FLUX_ON_PAGE = 'FLUX_ON_PAGE'
+    FLUX_ON_PAGE = 'FLUX_ON_PAGE',
+    TOGGLE_TABLE_TYPE = 'TOGGLE_TABLE_TYPE'
 }
 
 export interface AppState {
@@ -61,5 +62,10 @@ export interface FluxOnPage {
     content: string;
 }
 
+export interface ToggleTableType {
+    type: ActionType.TOGGLE_TABLE_TYPE;
+    notes_shown: NotesShown;
+}
 
-export type Action = AddNoteAction | ArchiveNoteAction | FluxOnPage;
+
+export type Action = AddNoteAction | ArchiveNoteAction | FluxOnPage | ToggleTableType;
