@@ -1,0 +1,47 @@
+.container{
+    min-height: 20px;
+    height: 6vh;
+    background-color: rgba(255, 255, 255, 0.96);
+    padding-left: 1vw;
+    padding-right: 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*margin-right: 1vh;*/
+}
+
+.name_of_page {
+    font-size: 2.3vh;
+    font-weight: 700;
+}
+
+.dropdown{
+    width: fit-content;
+    font-size: 1.2rem;
+    padding: 0 0.2rem;
+}
+
+.addNote_button{
+    width: 45%;
+    font-size: 1.2rem;
+    padding: 0.2rem;
+}
+
+.buttons_container{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.extra_info {
+    margin-left: 0.5vw;
+    font-weight: 500;
+}
+
+.name_container{
+    display: flex;
+}
+
+.right_side_navbar{
+
+}

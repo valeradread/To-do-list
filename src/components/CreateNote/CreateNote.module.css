@@ -1,0 +1,122 @@
+.page_container{
+    width: fit-content;
+    position: relative;
+}
+
+.header{
+
+}
+
+.param_container{
+    display: flex;
+    align-items: center;
+    min-width: 500px;
+    width: 34vw;
+    margin-right: 1vw;
+}
+
+.title{
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.icon {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.closeModal_button{
+    padding: 0;
+    min-width: 30px;
+    min-height: 30px;
+    width: 3.5vh;
+    height: 3.5vh;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 20px;
+    position: absolute;
+    right: 10px;
+    top: -5px;
+}
+
+.closeModal_button:hover{
+    background-color: lightgrey;
+}
+
+.closeModal_button:active{
+    background-color: grey;
+}
+
+.param_select{
+    width: 41%;
+    height: 1.9rem;
+    font-size: 1.2rem;
+}
+
+.params_container p{
+    /*height: 1rem;*/
+    /*border: 1px solid black*/
+}
+
+.param_text{
+    max-width: 60%;
+    min-width: 100px;
+    /*border: 1px solid black*/
+}
+
+.param_text p{
+    font-size: 1.2rem;
+}
+
+.test{
+    border: 1px solid black
+}
+
+.note_area{
+    width: 100%;
+    margin-right: 0;
+    min-height: 200px;
+    resize: none;
+    font-size: 1.2rem;
+}
+
+.param_input{
+    width: 40%;
+    height: 1.4rem;
+}
+
+.button_container{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    width: 100%;
+    padding:0
+
+}
+
+.save_button{
+    min-width: 100px;
+    width: 20%;
+    height: 1.8rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(30, 180, 90, 0.82);
+    border-radius: 4px;
+    border: none;
+    font-weight: bolder;
+    color: #f7f7fd;
+    cursor: pointer;
+}
+
+.save_button:hover{
+    background-color: rgb(30, 180, 90);
+
+}
+
+.save_button:active{
+    background-color: rgb(27, 157, 79);
+}

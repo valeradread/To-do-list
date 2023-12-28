@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+body{
+  margin: 0;
+  padding: 0;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +40,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: Source Sance Pro;
+  src: url(./assets/SourceSansPro-Regular.ttf);
+}
+
+@font-face {
+  font-family: Source Sance Pro Light;
+  src: url(./assets/SourceSansPro-Light.ttf);
+}
+
+@font-face {
+  font-family: Source Sance Pro SemiBold;
+  src: url(./assets/SourceSansPro-SemiBold.ttf);
+}
+
+:root {
+  --active_item: #e3e2e2;
+  --hover_item: #efefef;
+  --table_border_shadow_color: #ababab;
 }
