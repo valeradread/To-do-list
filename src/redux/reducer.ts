@@ -151,6 +151,12 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
                 ...state,
                 notes_shown: notes_shown
             }
+        case ActionType.DELETE_NOTE:
+            const notes = state.notes.filter((n)=>(n.id !== action.id))
+            return {
+                ...state,
+                notes: notes
+            }
 
         // case ActionType.TOGGLE_TODO:
         //     return {
@@ -179,7 +185,8 @@ export const addNoteAC = (
 ) => ({type: ActionType.ADD_NOTE, payload});
 
 export const toggleArchiveNoteAC = (id: number) => ({type: ActionType.TOGGLE_ARCHIVE_NOTE, id});
-export const toggleTableTypeAC = (notes_shown:NotesShown) => ({type: ActionType.TOGGLE_TABLE_TYPE, notes_shown})
+export const toggleTableTypeAC = (notes_shown:NotesShown) => ({type: ActionType.TOGGLE_TABLE_TYPE, notes_shown});
+export const deleteNoteAC = (id: number) => ({type: ActionType.DELETE_NOTE, id})
 
 export default reducer;
 

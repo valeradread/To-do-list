@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import NotesTable from './NotesTable'
 import {RootState} from "../../redux/store";
 import {AppState, Note, NotesShown} from "../../redux/types";
-import {toggleArchiveNoteAC} from "../../redux/reducer";
+import {deleteNoteAC, toggleArchiveNoteAC} from "../../redux/reducer";
 
 interface NotesTableProps {
     notes: Note[];
@@ -56,6 +56,7 @@ let mapStateToProps = (state: RootState) => {
 }
 
 let ActionCreators = {
-    toggleArchiveNote: toggleArchiveNoteAC
+    toggleArchiveNote: toggleArchiveNoteAC,
+    deleteNote: deleteNoteAC
 }
 export default connect(mapStateToProps, ActionCreators)(NotesTableContainer);

@@ -5,10 +5,12 @@ import CreateNote_Container from "../CreateNote/CreateNote_Container";
 import edit_icon from "../../assets/edit-60.svg";
 import delete_icon from "../../assets/delete-189.svg"
 import archive_icon from "../../assets/archive-26.svg"
+import Modal from "../ExtraComponents/Modal/Modal";
 
 
 const NotesTable = (props: any) => {
-
+    const [modalDeleteNote, setModalDeleteNote] = useState(false);
+    const [noteId, setNoteId] = useState(0)
 
     return <div className={s.page_container}>
         <div className={s.nodes_table}>
@@ -57,7 +59,10 @@ const NotesTable = (props: any) => {
                                         }} className={s.tool_button}>
                                             <img src={archive_icon} className={s.icon}/>
                                         </button>
-                                        <button className={s.tool_button}>
+                                        <button className={s.tool_button} onClick={()=>{
+                                            setNoteId(n.id)
+                                            setModalDeleteNote(true)
+                                            }}>
                                             <img src={delete_icon} className={s.icon}/>
                                         </button>
                                     </div>
@@ -67,7 +72,19 @@ const NotesTable = (props: any) => {
                 }
             </div>
         </div>
+        <Modal active={modalDeleteNote} setActive={setModalDeleteNote}>
+            <div>
+                <p>Do you want to delete this note?</p>
+                <div>
+                    <button onClick={() =>{
+                        props.deleteNote(noteId);
+                        setModalDeleteNote(false)
+                    }}> Yes </button>
+                    <button onClick={()=>(setModalDeleteNote(false))}> No </button>
+                </div>
+            </div>
 
+        </Modal>
 
     </div>
 }

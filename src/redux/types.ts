@@ -24,7 +24,8 @@ export enum ActionType {
     ADD_NOTE = 'ADD_NOTE',
     TOGGLE_ARCHIVE_NOTE = 'TOGGLE_ARCHIVE_NOTE',
     FLUX_ON_PAGE = 'FLUX_ON_PAGE',
-    TOGGLE_TABLE_TYPE = 'TOGGLE_TABLE_TYPE'
+    TOGGLE_TABLE_TYPE = 'TOGGLE_TABLE_TYPE',
+    DELETE_NOTE = 'DELETE_NOTE'
 }
 
 export interface AppState {
@@ -67,5 +68,9 @@ export interface ToggleTableType {
     notes_shown: NotesShown;
 }
 
+export interface DeleteNote {
+    type: ActionType.DELETE_NOTE;
+    id: number;
+}
 
-export type Action = AddNoteAction | ArchiveNoteAction | FluxOnPage | ToggleTableType;
+export type Action = AddNoteAction | ArchiveNoteAction | FluxOnPage | ToggleTableType | DeleteNote;

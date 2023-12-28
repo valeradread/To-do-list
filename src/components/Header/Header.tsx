@@ -1,11 +1,12 @@
 import React, {useRef, useState} from 'react';
 import s from './Header.module.css';
 import CreateNote_Container from "../CreateNote/CreateNote_Container";
-import {NotesCategory, NotesShown} from "../../redux/types";
+import {NotesShown} from "../../redux/types";
 
 
 const Header = (props: any) => {
     const [modalCreateNote, setModalCreateNote] = useState(false);
+
     const notesShownRef = useRef<HTMLSelectElement>(null);
     const onSelect = () =>{
         let notes_shown = notesShownRef.current?.value as NotesShown || NotesShown.NOT_ARCHIVED;
