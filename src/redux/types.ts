@@ -25,7 +25,12 @@ export enum ActionType {
     TOGGLE_ARCHIVE_NOTE = 'TOGGLE_ARCHIVE_NOTE',
     FLUX_ON_PAGE = 'FLUX_ON_PAGE',
     TOGGLE_TABLE_TYPE = 'TOGGLE_TABLE_TYPE',
-    DELETE_NOTE = 'DELETE_NOTE'
+    DELETE_NOTE = 'DELETE_NOTE',
+    SET_EDIT_NOTE = 'SET_EDIT_NOTE',
+    RESET_FLUX = 'RESET_FLUX',
+    // TOGGLE_CREATING_NOTE = 'TOGGLE_CREATING_NOTE',
+    TOGGLE_EDITING_NOTE = 'TOGGLE_EDITING_NOTE',
+    EDIT_NOTE = 'EDIT_NOTE'
 }
 
 export interface AppState {
@@ -35,7 +40,8 @@ export interface AppState {
         name: string;
         category: NotesCategory;
         content: string;
-    }
+    };
+    isEditingNote: boolean;
 }
 
 export interface AddNoteAction {
@@ -73,4 +79,36 @@ export interface DeleteNote {
     id: number;
 }
 
-export type Action = AddNoteAction | ArchiveNoteAction | FluxOnPage | ToggleTableType | DeleteNote;
+export interface SetEditNote {
+    type: ActionType.SET_EDIT_NOTE;
+    id: number
+}
+
+export interface ResetFlux {
+    type: ActionType.RESET_FLUX;
+}
+
+export interface ToggleEditingNote {
+    type: ActionType.TOGGLE_EDITING_NOTE;
+    isEditingNote: boolean
+}
+
+export interface EditNote {
+    type: ActionType.EDIT_NOTE;
+    payload: {
+        id:number;
+        name: string;
+        category: NotesCategory;
+        content: string;
+    };
+}
+
+export type Action = AddNoteAction |
+    ArchiveNoteAction |
+    FluxOnPage |
+    ToggleTableType |
+    DeleteNote |
+    SetEditNote |
+    ResetFlux |
+    ToggleEditingNote |
+    EditNote;

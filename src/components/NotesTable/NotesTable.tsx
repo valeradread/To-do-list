@@ -1,16 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from './NotesTable.module.css';
-import {AppState, Note, NotesShown} from "../../redux/types";
-import CreateNote_Container from "../CreateNote/CreateNote_Container";
+import {Note} from "../../redux/types";
 import edit_icon from "../../assets/edit-60.svg";
 import delete_icon from "../../assets/delete-189.svg"
 import archive_icon from "../../assets/archive-26.svg"
 import Modal from "../ExtraComponents/Modal/Modal";
+import NoteComponent_Container from "../ExtraComponents/Note/NoteComponent_Container";
+import {toggleEditingNoteAC} from "../../redux/reducer";
 
 
 const NotesTable = (props: any) => {
     const [modalDeleteNote, setModalDeleteNote] = useState(false);
-    const [noteId, setNoteId] = useState(0)
+    const [noteId, setNoteId] = useState(0);
+
 
     return <div className={s.page_container}>
         <div className={s.nodes_table}>
@@ -19,56 +21,61 @@ const NotesTable = (props: any) => {
                 <div className={s.name_of_column}><p>Name</p></div>
                 <div className={s.name_of_column}><p>Created</p></div>
                 <div className={s.name_of_column}><p>Category</p></div>
-                <div className={s.name_of_column}><p>Content</p></div>
+                <div className={s.name_of_column}><p>Note</p></div>
                 <div className={s.name_of_column}><p>Dates</p></div>
                 <div className={s.name_of_column}><p>Tools</p></div>
             </div>
             <div className={s.values_of_params_container}>
                 {
-                        props.notes.map((n: Note) => (
+                    props.notes.map((n: Note) => (
 
-                            <div className={s.values_of_params} key={n.id}>
-                                <div className={s.param_value_container}>
-                                    <p className={s.param_value}> {n.category} </p>
-                                </div>
-                                <div className={s.param_value_container}>
-                                    <p className={s.param_value}> {n.name} </p>
-                                </div>
-                                <div className={s.param_value_container}>
-                                    <p className={s.param_value}> {n.date_created} </p>
-                                </div>
-                                <div className={s.param_value_container}>
-                                    <p className={s.param_value}> {n.category} </p>
-                                </div>
-                                <div className={s.param_value_container}>
-                                    <p className={s.param_value}> {n.content} </p>
-                                </div>
-                                <div className={s.param_value_container}>
-                                    <p className={s.param_value}> {n.dates.map((d: string) => (
-                                        d + ',\n'))}
-                                    </p>
-                                </div>
-                                <div className={s.param_value_container}>
-                                    <div className={s.tools_container}>
-                                        <button className={s.tool_button}>
-                                            <img src={edit_icon} className={s.icon}/>
-                                        </button>
-                                        <button onClick={() =>{
-                                            debugger
-                                            props.toggleArchiveNote(n.id)
-                                        }} className={s.tool_button}>
-                                            <img src={archive_icon} className={s.icon}/>
-                                        </button>
-                                        <button className={s.tool_button} onClick={()=>{
-                                            setNoteId(n.id)
-                                            setModalDeleteNote(true)
-                                            }}>
-                                            <img src={delete_icon} className={s.icon}/>
-                                        </button>
-                                    </div>
+                        <div className={s.values_of_params} key={n.id}>
+                            <div className={s.param_value_container}>
+                                <p className={s.param_value}> {n.category} </p>
+                            </div>
+                            <div className={s.param_value_container}>
+                                <p className={s.param_value}> {n.name} </p>
+                            </div>
+                            <div className={s.param_value_container}>
+                                <p className={s.param_value}> {n.date_created} </p>
+                            </div>
+                            <div className={s.param_value_container}>
+                                <p className={s.param_value}> {n.category} </p>
+                            </div>
+                            <div className={s.param_value_container}>
+                                <p className={s.param_value}> {n.content} </p>
+                            </div>
+                            <div className={s.param_value_container}>
+                                <p className={s.param_value}> {n.dates.map((d: string) => (
+                                    d + ',\n'))}
+                                </p>
+                            </div>
+                            <div className={s.param_value_container}>
+                                <div className={s.tools_container}>
+                                    <button className={s.tool_button} onClick={() => {
+
+                                        props.setEditNote(n.id);
+                                        props.toggleEditingNote(true);
+                                    }}>
+                                        <img src={edit_icon} className={s.icon}/>
+                                    </button>
+
+                                    <button onClick={() => {
+                                        props.toggleArchiveNote(n.id)
+                                        props.toggleEditingNote(false)
+                                    }} className={s.tool_button}>
+                                        <img src={archive_icon} className={s.icon}/>
+                                    </button>
+                                    <button className={s.tool_button} onClick={() => {
+                                        setNoteId(n.id)
+                                        setModalDeleteNote(true)
+                                    }}>
+                                        <img src={delete_icon} className={s.icon}/>
+                                    </button>
                                 </div>
                             </div>
-                        ))
+                        </div>
+                    ))
                 }
             </div>
         </div>
@@ -76,15 +83,30 @@ const NotesTable = (props: any) => {
             <div>
                 <p>Do you want to delete this note?</p>
                 <div>
-                    <button onClick={() =>{
+                    <button onClick={() => {
                         props.deleteNote(noteId);
-                        setModalDeleteNote(false)
-                    }}> Yes </button>
-                    <button onClick={()=>(setModalDeleteNote(false))}> No </button>
+                        props.toggleEditingNote(false);
+                        setModalDeleteNote(false);
+                    }}> Yes
+                    </button>
+                    <button onClick={() => (setModalDeleteNote(false))}> No</button>
                 </div>
             </div>
 
         </Modal>
+
+        <div className={s.edit_note_page}>
+            {props.isEditingNote ?
+
+                <div >
+                    <NoteComponent_Container {...props} isCreate={false} id={noteId}/>
+                </div>
+                :
+                <div >
+                    <p>Click on note for details</p>
+                </div>
+            }
+        </div>
 
     </div>
 }

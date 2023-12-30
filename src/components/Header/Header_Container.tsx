@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
 import {NotesShown} from "../../redux/types";
-import {toggleTableTypeAC} from "../../redux/reducer";
+import {resetFluxAC, toggleEditingNoteAC, toggleTableTypeAC} from "../../redux/reducer";
 import Header from "./Header";
 
 interface HeaderProps {
@@ -17,7 +17,6 @@ class Header_Container extends Component<HeaderProps>{
 
     componentDidUpdate() {
 
-
     }
 
     render() {
@@ -27,14 +26,18 @@ class Header_Container extends Component<HeaderProps>{
 }
 
 let mapStateToProps = (state: RootState) => {
-    console.log(state.notesTable_reducer)
+
     return {
-         notes_shown: state.notesTable_reducer.notes_shown
+         notes_shown: state.notesTable_reducer.notes_shown,
+         isEditingNote: state.notesTable_reducer.isEditingNote,
+
     }
 
 }
 
 let ActionCreators = {
-    toggleTableType: toggleTableTypeAC
+    toggleTableType: toggleTableTypeAC,
+    resetFlux: resetFluxAC,
+    toggleEditingNote: toggleEditingNoteAC
 }
 export default connect(mapStateToProps, ActionCreators)(Header_Container);

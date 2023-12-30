@@ -2,15 +2,16 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import CreateNote from './CreateNote'
 import {RootState} from "../../redux/store";
-import {Note, NotesShown} from "../../redux/types";
-import {addNoteAC, fluxOnPageAC} from "../../redux/reducer";
+import {addNoteAC, fluxOnPageAC, resetFluxAC} from "../../redux/reducer";
 
 interface CreateNoteContainerProps {
     active: boolean;
     setActive: React.Dispatch<React.SetStateAction<boolean>>;
+    toggleCreatingNote: () => void;
+
 }
 
-class CreateNote_Container extends Component<CreateNoteContainerProps>{
+class CreateNote_Container extends Component<CreateNoteContainerProps> {
 
     componentDidMount() {
 
@@ -23,20 +24,22 @@ class CreateNote_Container extends Component<CreateNoteContainerProps>{
 
     render() {
 
-      return  <CreateNote {...this.props}/>
+        return <CreateNote {...this.props}/>
     }
 }
 
 let mapStateToProps = (state: RootState) => {
-    console.log(state.notesTable_reducer)
+
     return {
-         flux: state.notesTable_reducer.flux
+        flux: state.notesTable_reducer.flux
     }
 
 }
 
 let ActionCreators = {
     fluxOnPage: fluxOnPageAC,
-    addNote: addNoteAC
+    addNote: addNoteAC,
+    resetFlux: resetFluxAC,
+
 }
 export default connect(mapStateToProps, ActionCreators)(CreateNote_Container);

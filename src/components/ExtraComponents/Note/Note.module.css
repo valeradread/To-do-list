@@ -1,9 +1,8 @@
 .page_container{
-    min-width: 600px;
-    width: fit-content;
-    position: relative;
-    z-index: -4;
+    width: 100%;
+    /*position: relative;*/
 }
+
 
 .header{
 
@@ -12,8 +11,8 @@
 .param_container{
     display: flex;
     align-items: center;
-    min-width: 500px;
-    width: 34vw;
+    min-width: 300px;
+    width: 100%;
     margin-right: 1vw;
 }
 
@@ -55,6 +54,7 @@
     width: 41%;
     height: 1.9rem;
     font-size: 1.2rem;
+    position: relative;
 }
 
 .params_container p{
@@ -87,6 +87,7 @@
 .param_input{
     width: 40%;
     height: 1.4rem;
+    position: relative;
 }
 
 .button_container{

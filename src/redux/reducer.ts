@@ -78,8 +78,14 @@ const initialState: AppState = {
         name: "",
         category: NotesCategory.TASK,
         content: ""
-    }
+    },
+    isEditingNote: false
 };
+
+const findDatesInNote = (note_content: string) => {
+    const dateRegex = /\b(?:0[1-9]|[12]\d|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20)\d{2}\b/g;
+    return note_content.match(dateRegex) || []
+}
 
 const reducer = (state: AppState = initialState, action: Action): AppState => {
     switch (action.type) {
@@ -95,8 +101,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
 
             const currentDateTimeString: string = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
 
-            const dateRegex = /\b(?:0[1-9]|[12]\d|3[01])\/(?:0[1-9]|1[0-2])\/(?:19|20)\d{2}\b/g;
-            const foundDates = action.payload.content.match(dateRegex) || [];
+            const foundDates = findDatesInNote(action.payload.content);
             return {
                 ...state,
                 flux: {
@@ -107,7 +112,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
                 notes: [
                     ...state.notes,
                     {
-                        id: state.notes[state.notes.length-1].id + 1,
+                        id: state.notes[state.notes.length - 1].id + 1,
                         name: action.payload.name,
                         category: action.payload.category,
                         date_created: currentDateTimeString,
@@ -152,19 +157,65 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
                 notes_shown: notes_shown
             }
         case ActionType.DELETE_NOTE:
-            const notes = state.notes.filter((n)=>(n.id !== action.id))
+            const notes = state.notes.filter((n) => (n.id !== action.id))
             return {
                 ...state,
                 notes: notes
             }
+        case ActionType.SET_EDIT_NOTE:
+            const note = state.notes.find(n => n.id === action.id)
+            let name: string = '';
+            let content: string = '';
+            let category: NotesCategory = NotesCategory.TASK;
+            if (note) {
+                name = note.name;
+                category = note.category;
+                content = note.content
+            }
+            return {
+                ...state,
+                flux: {
+                    name: name,
+                    category: category,
+                    content: content
+                }
+            }
+        case ActionType.RESET_FLUX:
 
-        // case ActionType.TOGGLE_TODO:
-        //     return {
-        //         ...state,
-        //         todos: state.todos.map((todo) =>
-        //             todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo
-        //         ),
-        //     };
+            return {
+                ...state,
+                flux: {
+                    name: '',
+                    category: NotesCategory.TASK,
+                    content: ''
+                }
+            }
+        case ActionType.TOGGLE_EDITING_NOTE:
+            return {
+                ...state,
+                isEditingNote: action.isEditingNote
+            }
+        case ActionType.EDIT_NOTE:
+            const newFoundDates = findDatesInNote(action.payload.content);
+            const new_notes = state.notes.map(n => {
+                    if(n.id === action.payload.id){
+                        return {
+                            ...n,
+                            name: action.payload.name,
+                            category: action.payload.category,
+                            content: action.payload.content,
+                            dates: newFoundDates
+                        }
+                    }
+                    return n;
+                }
+            )
+            return {
+                ...state,
+                notes: new_notes,
+            }
+
+
         default:
             return state;
     }
@@ -185,8 +236,18 @@ export const addNoteAC = (
 ) => ({type: ActionType.ADD_NOTE, payload});
 
 export const toggleArchiveNoteAC = (id: number) => ({type: ActionType.TOGGLE_ARCHIVE_NOTE, id});
-export const toggleTableTypeAC = (notes_shown:NotesShown) => ({type: ActionType.TOGGLE_TABLE_TYPE, notes_shown});
-export const deleteNoteAC = (id: number) => ({type: ActionType.DELETE_NOTE, id})
+export const toggleTableTypeAC = (notes_shown: NotesShown) => ({type: ActionType.TOGGLE_TABLE_TYPE, notes_shown});
+export const deleteNoteAC = (id: number) => ({type: ActionType.DELETE_NOTE, id});
+export const setEditNoteAC = (id: number) => ({type: ActionType.SET_EDIT_NOTE, id});
+export const resetFluxAC = () => ({type: ActionType.RESET_FLUX});
+export const toggleEditingNoteAC = (isEditingNote: boolean) => ({type: ActionType.TOGGLE_EDITING_NOTE, isEditingNote})
+export const editNoteAC = (payload: {
+    id:number,
+    name: string,
+    category: NotesCategory,
+    content: string
+}) =>  ({
+    type: ActionType.EDIT_NOTE, payload})
 
 export default reducer;
 

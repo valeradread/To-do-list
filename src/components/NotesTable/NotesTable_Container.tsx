@@ -2,8 +2,14 @@ import React from "react";
 import {connect} from "react-redux";
 import NotesTable from './NotesTable'
 import {RootState} from "../../redux/store";
-import {AppState, Note, NotesShown} from "../../redux/types";
-import {deleteNoteAC, toggleArchiveNoteAC} from "../../redux/reducer";
+import {Note, NotesShown} from "../../redux/types";
+import {
+    deleteNoteAC, editNoteAC,
+    fluxOnPageAC,
+    setEditNoteAC,
+    toggleArchiveNoteAC,
+    toggleEditingNoteAC
+} from "../../redux/reducer";
 
 interface NotesTableProps {
     notes: Note[];
@@ -40,23 +46,29 @@ class NotesTableContainer extends React.Component<NotesTableProps> {
             }
 
         }
-        return <NotesTable {...props}/>
+        return <NotesTable {...props} />
     }
 
 
 }
 
 let mapStateToProps = (state: RootState) => {
-    // console.log(state.notesTable_reducer)
+
     return {
         notes: state.notesTable_reducer ? state.notesTable_reducer.notes : [],
-        notes_shown: state.notesTable_reducer ? state.notesTable_reducer.notes_shown : NotesShown.NOT_ARCHIVED
+        notes_shown: state.notesTable_reducer ? state.notesTable_reducer.notes_shown : NotesShown.NOT_ARCHIVED,
+        flux: state.notesTable_reducer.flux,
+        isEditingNote: state.notesTable_reducer.isEditingNote
     }
 
 }
 
 let ActionCreators = {
     toggleArchiveNote: toggleArchiveNoteAC,
-    deleteNote: deleteNoteAC
+    deleteNote: deleteNoteAC,
+    setEditNote: setEditNoteAC,
+    fluxOnPage: fluxOnPageAC,
+    toggleEditingNote: toggleEditingNoteAC,
+    editNote: editNoteAC
 }
 export default connect(mapStateToProps, ActionCreators)(NotesTableContainer);
