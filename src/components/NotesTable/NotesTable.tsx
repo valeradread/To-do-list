@@ -6,7 +6,9 @@ import delete_icon from "../../assets/delete-189.svg"
 import archive_icon from "../../assets/archive-26.svg"
 import Modal from "../ExtraComponents/Modal/Modal";
 import NoteComponent_Container from "../ExtraComponents/Note/NoteComponent_Container";
-import {toggleEditingNoteAC} from "../../redux/reducer";
+import TASK_icon from "../../assets/idea-svgrepo-com.svg"
+import RANDOM_THOUGHT_icon from "../../assets/brain-svgrepo-com.svg"
+import IDEA_icon from "../../assets/pin-fill-svgrepo-com.svg"
 
 
 const NotesTable = (props: any) => {
@@ -31,7 +33,9 @@ const NotesTable = (props: any) => {
 
                         <div className={s.values_of_params} key={n.id}>
                             <div className={s.param_value_container}>
-                                <p className={s.param_value}> {n.category} </p>
+                                <p className={s.param_value}> {
+                                    <img src={`${n.category.toString()}_icon`}/>
+                                } </p>
                             </div>
                             <div className={s.param_value_container}>
                                 <p className={s.param_value}> {n.name} </p>

@@ -6,6 +6,7 @@ export interface Note {
     content: string;
     dates: string[];
     archived: boolean;
+    icon: string;
 }
 
 export enum NotesShown {
@@ -14,9 +15,9 @@ export enum NotesShown {
 }
 
 export enum NotesCategory {
-    TASK = "Task",
-    RANDOM_THOUGHT = "Random Thought",
-    IDEA = "Idea"
+    TASK = "TASK",
+    RANDOM_THOUGHT = "RANDOM_THOUGHT",
+    IDEA = "IDEA"
 
 }
 
@@ -54,6 +55,7 @@ export interface AddNoteAction {
         content: string;
         dates: string[];
         archived: boolean;
+        icon: string;
     };
 }
 

@@ -5,11 +5,12 @@ const initialState: AppState = {
         {
             id: 0,
             name: "Pokupki1",
-            category: NotesCategory.TASK,
+            category: NotesCategory.IDEA,
             date_created: "3/5/2021",
             content: "Pivo pivo pivo",
             dates: [],
-            archived: false
+            archived: false,
+            icon: NotesCategory.IDEA.toString()
         },
 
         {
@@ -19,7 +20,8 @@ const initialState: AppState = {
             date_created: "3/5/2021",
             content: "Pivo pivo pivo",
             dates: [],
-            archived: false
+            archived: false,
+            icon: NotesCategory.TASK.toString()
         },
 
         {
@@ -29,17 +31,19 @@ const initialState: AppState = {
             date_created: "3/5/2021",
             content: "Pivo pivo pivo",
             dates: [],
-            archived: false
+            archived: false,
+            icon: NotesCategory.TASK.toString()
         },
 
         {
             id: 3,
             name: "Pokupki4",
-            category: NotesCategory.TASK,
+            category: NotesCategory.IDEA,
             date_created: "3/5/2021",
             content: "Pivo pivo pivo",
             dates: [],
-            archived: false
+            archived: false,
+            icon: NotesCategory.IDEA.toString()
         },
 
         {
@@ -49,17 +53,19 @@ const initialState: AppState = {
             date_created: "3/5/2021",
             content: "Pivo pivo pivo",
             dates: [],
-            archived: false
+            archived: false,
+            icon: NotesCategory.TASK.toString()
         },
 
         {
             id: 5,
             name: "Pokupki6",
-            category: NotesCategory.TASK,
+            category: NotesCategory.RANDOM_THOUGHT,
             date_created: "3/5/2021",
             content: "Pivo pivo pivo",
             dates: [],
-            archived: false
+            archived: false,
+            icon: NotesCategory.RANDOM_THOUGHT.toString()
         },
 
         {
@@ -69,7 +75,8 @@ const initialState: AppState = {
             date_created: "3/5/2021",
             content: "Pivo pivo pivo",
             dates: [],
-            archived: false
+            archived: false,
+            icon: NotesCategory.TASK.toString()
         },
 
     ],
@@ -90,6 +97,11 @@ const findDatesInNote = (note_content: string) => {
 const reducer = (state: AppState = initialState, action: Action): AppState => {
     switch (action.type) {
         case ActionType.ADD_NOTE:
+            let id = 0;
+            if(state.notes.length > 0){
+                id = state.notes[state.notes.length - 1].id + 1
+            }
+
             const currentDateTime: Date = new Date();
 
             const year: number = currentDateTime.getFullYear();
@@ -112,13 +124,14 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
                 notes: [
                     ...state.notes,
                     {
-                        id: state.notes[state.notes.length - 1].id + 1,
+                        id: id,
                         name: action.payload.name,
                         category: action.payload.category,
                         date_created: currentDateTimeString,
                         content: action.payload.content,
                         dates: foundDates,
                         archived: false,
+                        icon: action.payload.category.toString()
                     },
                 ],
             }
@@ -204,7 +217,8 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
                             name: action.payload.name,
                             category: action.payload.category,
                             content: action.payload.content,
-                            dates: newFoundDates
+                            dates: newFoundDates,
+                            icon: action.payload.category.toString()
                         }
                     }
                     return n;
