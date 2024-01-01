@@ -15,20 +15,38 @@
     font-weight: 700;
 }
 
-.dropdown{
+.dropdown {
     width: fit-content;
     font-size: 1.2rem;
     padding: 0 0.2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #287ecf;
+    text-align: center;
+}
+
+.dropdown:focus {
+    text-align: start;
 }
 
 .addNote_button{
     width: 45%;
     font-size: 1.2rem;
     padding: 0.2rem;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    color: #287ecf;
+    background-color: white;
+    transition: color 0.1s ease, background-color 0.1s ease;
+}
+
+.addNote_button:hover{
+    color: white;
+    background-color: rgb(40, 126, 207);
 }
 
 .buttons_container{
-    width: 20%;
+    width: 25%;
     display: flex;
     justify-content: space-between;
 }

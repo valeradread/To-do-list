@@ -1,24 +1,23 @@
 import React, {useEffect, useRef, useState} from 'react';
 import s from './SummaryTable.module.css';
-import {Note} from "../../redux/types";
-import edit_icon from "../../assets/edit-60.svg";
-import delete_icon from "../../assets/delete-189.svg"
-import archive_icon from "../../assets/archive-26.svg"
-import Modal from "../ExtraComponents/Modal/Modal";
-import NoteComponent_Container from "../ExtraComponents/Note/NoteComponent_Container";
-import {toggleEditingNoteAC} from "../../redux/reducer";
 import {note_category} from "./SummaryTable_Container";
+import Task_icon from "../../assets/idea-svgrepo-com.svg"
+import Random_Thought_icon from "../../assets/brain-svgrepo-com.svg"
+import Idea_icon from "../../assets/pin-fill-svgrepo-com.svg"
+import {NotesCategory} from "../../redux/types";
 
 
 const SummaryTable = (props: any) => {
-    const [modalDeleteNote, setModalDeleteNote] = useState(false);
-    const [noteId, setNoteId] = useState(0);
-console.log(props)
 
-    return <div className={s.page_container}>
-        <div className={s.nodes_table}>
+
+    return <div>
+        <div className={s.name_of_page}>
+            <p> Summary table </p>
+        </div>
+    <div className={s.page_container}>
+        <div className={s.notes_table}>
             <div className={s.names_of_params}>
-                {/*<div className={s.name_of_column}></div>*/}
+                <div className={s.name_of_column}></div>
                 <div className={s.name_of_column}><p>Name</p></div>
                 <div className={s.name_of_column}><p>Created</p></div>
                 <div className={s.name_of_column}><p>Category</p></div>
@@ -28,6 +27,22 @@ console.log(props)
                     props.notes_categories.map((n: note_category) => (
 
                         <div className={s.values_of_params}>
+                            <div className={s.icon_value_container}>
+                                <div className={s.category_icon_container}>
+                                    {(() => {
+                                        switch (n._name) {
+                                            case NotesCategory.TASK:
+                                                return <img className={s.icon} alt={''} src={Task_icon} />;
+                                            case NotesCategory.RANDOM_THOUGHT:
+                                                return <img className={s.icon} alt={''} src={Random_Thought_icon} />;
+                                            case NotesCategory.IDEA:
+                                                return <img className={s.icon} alt={''} src={Idea_icon} />;
+                                            default:
+                                                return null;
+                                        }
+                                    })()}
+                                </div>
+                            </div>
                             <div className={s.param_value_container}>
                                 <p className={s.param_value}> {n._name.toString()} </p>
                             </div>
@@ -47,6 +62,7 @@ console.log(props)
 
 
 
+    </div>
     </div>
 }
 

@@ -68,24 +68,19 @@
 
 
 .names_of_params {
-
     display: grid;
     grid-template-columns: minmax(40px, 0.3fr) repeat(5, minmax(100px, 1fr)) minmax(50px, 0.5fr);
-
     background-color: #287ecf;
     box-sizing: border-box;
     grid-gap: 1px;
     color: white
-
 }
 
 .name_of_column {
     display: flex;
     height: 100%;
     font-size: 1rem;
-    /*border: 1px solid #ababab;*/
     font-weight: 500;
-    /*box-shadow: 0 0 0 1px #ababab;*/
     align-content: center;
     justify-content: flex-start;
     -webkit-touch-callout: none;
@@ -106,8 +101,6 @@
     box-sizing: border-box;
     grid-gap: 1px;
     margin-top: 1px;
-
-
 }
 
 .values_of_params:nth-child(even) {
@@ -145,21 +138,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    /*margin-top: 0.3rem;*/
-    /*padding-left: 0.5vw;*/
-    /*padding-right: 0.5vw;*/
-    /*border: 1px solid #ababab;*/
-    /*box-shadow: 0 0 0 1px #ababab;*/
     padding: 0.3rem;
     max-height: 3.5rem;
-    overflow-x: auto; /* Горизонтальний скролбар при необхідності */
+    overflow-x: auto;
     overflow-y: auto;
 }
-
-.content_value {
-
-}
-
 
 .param_value_container::-webkit-scrollbar {
     height: 5px;
@@ -193,10 +176,21 @@
     padding: 0;
 }
 
-.svg_icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: middle;
-    fill: currentColor;
-    overflow: hidden;
+.modal_button{
+    width: 40%;
+    padding: 0.2rem;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    color: #287ecf;
+    background-color: white;
+}
+
+.modal_button:hover{
+    color: white;
+    background-color: rgb(40, 126, 207);
+}
+
+.modal_buttons_container{
+    display: flex;
+    justify-content: space-around;
 }

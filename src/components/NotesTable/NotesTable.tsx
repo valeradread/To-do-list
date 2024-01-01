@@ -28,7 +28,7 @@ const NotesTable = (props: any) => {
                 <div className={s.name_of_column}><p>Tools</p></div>
             </div>
             <div className={s.values_of_params_container}>
-                {
+                {props.notes.length !== 0 ?
                     props.notes.map((n: Note) => (
                         <div className={s.values_of_params} key={n.id}>
                             <div className={s.icon_value_container}>
@@ -90,20 +90,20 @@ const NotesTable = (props: any) => {
                             </div>
                         </div>
                     ))
-                }
+                : <p> Add some notes! </p>}
             </div>
         </div>
         <Modal active={modalDeleteNote} setActive={setModalDeleteNote}>
             <div>
                 <p>Do you want to delete this note?</p>
-                <div>
-                    <button onClick={() => {
+                <div className={s.modal_buttons_container}>
+                    <button className={s.modal_button} onClick={() => {
                         props.deleteNote(noteId);
                         props.toggleEditingNote(false);
                         setModalDeleteNote(false);
                     }}> Yes
                     </button>
-                    <button onClick={() => (setModalDeleteNote(false))}> No</button>
+                    <button className={s.modal_button} onClick={() => (setModalDeleteNote(false))}> No</button>
                 </div>
             </div>
 
