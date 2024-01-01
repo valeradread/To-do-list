@@ -82,6 +82,7 @@ const initialState: AppState = {
     ],
     notes_shown: NotesShown.NOT_ARCHIVED,
     flux: {
+        id: null,
         name: "",
         category: NotesCategory.TASK,
         content: ""
@@ -101,7 +102,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
             if(state.notes.length > 0){
                 id = state.notes[state.notes.length - 1].id + 1
             }
-
+            console.log(NotesCategory.TASK.toString())
             const currentDateTime: Date = new Date();
 
             const year: number = currentDateTime.getFullYear();
@@ -117,6 +118,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
             return {
                 ...state,
                 flux: {
+                    id: null,
                     name: '',
                     category: NotesCategory.TASK,
                     content: ''
@@ -136,11 +138,12 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
                 ],
             }
         case ActionType.FLUX_ON_PAGE:
-            console.log(action)
+
             return {
 
                 ...state,
                 flux: {
+                    ...state.flux,
                     name: action.name,
                     category: action.category,
                     content: action.content
@@ -179,8 +182,10 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
             const note = state.notes.find(n => n.id === action.id)
             let name: string = '';
             let content: string = '';
+            let edit_id: number|null = null;
             let category: NotesCategory = NotesCategory.TASK;
             if (note) {
+                edit_id = note.id;
                 name = note.name;
                 category = note.category;
                 content = note.content
@@ -188,6 +193,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
             return {
                 ...state,
                 flux: {
+                    id: edit_id,
                     name: name,
                     category: category,
                     content: content
@@ -198,6 +204,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
             return {
                 ...state,
                 flux: {
+                    id: null,
                     name: '',
                     category: NotesCategory.TASK,
                     content: ''

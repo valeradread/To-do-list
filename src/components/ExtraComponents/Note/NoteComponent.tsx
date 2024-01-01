@@ -38,8 +38,9 @@ const NoteComponent = (props: any) => {
         let name = props.flux.name;
         let category = props.flux.category;
         let content = props.flux.content;
+        let id = props.flux.id;
         if (name !== '' || content !== '') {
-            props.isEditingNote ? props.editNote({id: props.id, name, category, content}) : props.addNote({name, category, content});
+            props.isEditingNote ? props.editNote({id, name, category, content}) : props.addNote({name, category, content});
             props.isEditingNote ? props.toggleEditingNote(false) : props.setActive(false);
         } else {
             props.isEditingNote ? props.toggleEditingNote(false) : props.setActive(false);

@@ -1,23 +1,23 @@
 import React, {useEffect, useRef, useState} from 'react';
 import s from './NotesTable.module.css';
-import {Note} from "../../redux/types";
+import {Note, NotesCategory} from "../../redux/types";
 import edit_icon from "../../assets/edit-60.svg";
 import delete_icon from "../../assets/delete-189.svg"
 import archive_icon from "../../assets/archive-26.svg"
 import Modal from "../ExtraComponents/Modal/Modal";
 import NoteComponent_Container from "../ExtraComponents/Note/NoteComponent_Container";
-import TASK_icon from "../../assets/idea-svgrepo-com.svg"
-import RANDOM_THOUGHT_icon from "../../assets/brain-svgrepo-com.svg"
-import IDEA_icon from "../../assets/pin-fill-svgrepo-com.svg"
+import Task_icon from "../../assets/idea-svgrepo-com.svg"
+import Random_Thought_icon from "../../assets/brain-svgrepo-com.svg"
+import Idea_icon from "../../assets/pin-fill-svgrepo-com.svg"
 
 
 const NotesTable = (props: any) => {
     const [modalDeleteNote, setModalDeleteNote] = useState(false);
     const [noteId, setNoteId] = useState(0);
 
-
+    console.log(noteId)
     return <div className={s.page_container}>
-        <div className={s.nodes_table}>
+        <div className={s.notes_table}>
             <div className={s.names_of_params}>
                 <div className={s.name_of_column}></div>
                 <div className={s.name_of_column}><p>Name</p></div>
@@ -30,12 +30,22 @@ const NotesTable = (props: any) => {
             <div className={s.values_of_params_container}>
                 {
                     props.notes.map((n: Note) => (
-
                         <div className={s.values_of_params} key={n.id}>
-                            <div className={s.param_value_container}>
-                                <p className={s.param_value}> {
-                                    <img src={`${n.category.toString()}_icon`}/>
-                                } </p>
+                            <div className={s.icon_value_container}>
+                                <div className={s.category_icon_container}>
+                                    {(() => {
+                                        switch (n.category) {
+                                            case NotesCategory.TASK:
+                                                return <img className={s.icon} alt={''} src={Task_icon} />;
+                                            case NotesCategory.RANDOM_THOUGHT:
+                                                return <img className={s.icon} alt={''} src={Random_Thought_icon} />;
+                                            case NotesCategory.IDEA:
+                                                return <img className={s.icon} alt={''} src={Idea_icon} />;
+                                            default:
+                                                return null;
+                                        }
+                                    })()}
+                                </div>
                             </div>
                             <div className={s.param_value_container}>
                                 <p className={s.param_value}> {n.name} </p>
@@ -103,7 +113,7 @@ const NotesTable = (props: any) => {
             {props.isEditingNote ?
 
                 <div >
-                    <NoteComponent_Container {...props} isCreate={false} id={noteId}/>
+                    <NoteComponent_Container {...props} isCreate={false}/>
                 </div>
                 :
                 <div >

@@ -15,9 +15,9 @@ export enum NotesShown {
 }
 
 export enum NotesCategory {
-    TASK = "TASK",
-    RANDOM_THOUGHT = "RANDOM_THOUGHT",
-    IDEA = "IDEA"
+    TASK = "Task",
+    RANDOM_THOUGHT = "Random Thought",
+    IDEA = "Idea"
 
 }
 
@@ -38,6 +38,7 @@ export interface AppState {
     notes: Note[];
     notes_shown: NotesShown;
     flux: {
+        id: number | null;
         name: string;
         category: NotesCategory;
         content: string;
@@ -66,6 +67,7 @@ export interface ArchiveNoteAction {
 
 export interface FluxOnPage {
     type: ActionType.FLUX_ON_PAGE;
+    id: number;
     name: string;
     category: NotesCategory;
     content: string;
