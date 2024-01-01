@@ -15,7 +15,7 @@ const NotesTable = (props: any) => {
     const [modalDeleteNote, setModalDeleteNote] = useState(false);
     const [noteId, setNoteId] = useState(0);
 
-    console.log(noteId)
+    console.log(props.notes)
     return <div className={s.page_container}>
         <div className={s.notes_table}>
             <div className={s.names_of_params}>
@@ -90,7 +90,7 @@ const NotesTable = (props: any) => {
                             </div>
                         </div>
                     ))
-                : <p> Add some notes! </p>}
+                : <p> {props.no_notes} </p>}
             </div>
         </div>
         <Modal active={modalDeleteNote} setActive={setModalDeleteNote}>

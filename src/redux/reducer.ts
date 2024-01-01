@@ -4,10 +4,10 @@ const initialState: AppState = {
     notes: [
         {
             id: 0,
-            name: "Pokupki1",
+            name: "Note 1",
             category: NotesCategory.IDEA,
-            date_created: "3/5/2021",
-            content: "Pivo pivo pivo",
+            date_created: "01/01/2023 00:01:00",
+            content: "Note 1 content",
             dates: [],
             archived: false,
             icon: NotesCategory.IDEA.toString()
@@ -15,21 +15,21 @@ const initialState: AppState = {
 
         {
             id: 1,
-            name: "Pokupki2",
+            name: "Note 2",
             category: NotesCategory.TASK,
-            date_created: "3/5/2021",
-            content: "Pivo pivo pivo",
+            date_created: "01/01/2023 00:02:00",
+            content: "Note 2 content",
             dates: [],
-            archived: false,
+            archived: true,
             icon: NotesCategory.TASK.toString()
         },
 
         {
             id: 2,
-            name: "Pokupki3",
+            name: "Note 3",
             category: NotesCategory.TASK,
-            date_created: "3/5/2021",
-            content: "Pivo pivo pivo",
+            date_created: "01/01/2023 00:03:00",
+            content: "Note 3 content",
             dates: [],
             archived: false,
             icon: NotesCategory.TASK.toString()
@@ -37,10 +37,10 @@ const initialState: AppState = {
 
         {
             id: 3,
-            name: "Pokupki4",
+            name: "Note 4",
             category: NotesCategory.IDEA,
-            date_created: "3/5/2021",
-            content: "Pivo pivo pivo",
+            date_created: "01/01/2023 00:04:00",
+            content: "Note 4 content",
             dates: [],
             archived: false,
             icon: NotesCategory.IDEA.toString()
@@ -48,10 +48,10 @@ const initialState: AppState = {
 
         {
             id: 4,
-            name: "Pokupki5",
+            name: "Note 5",
             category: NotesCategory.TASK,
-            date_created: "3/5/2021",
-            content: "Pivo pivo pivo",
+            date_created: "01/01/2023 00:05:00",
+            content: "Note 5 content",
             dates: [],
             archived: false,
             icon: NotesCategory.TASK.toString()
@@ -59,10 +59,10 @@ const initialState: AppState = {
 
         {
             id: 5,
-            name: "Pokupki6",
+            name: "Note 6",
             category: NotesCategory.RANDOM_THOUGHT,
-            date_created: "3/5/2021",
-            content: "Pivo pivo pivo",
+            date_created: "01/01/2023 00:06:00",
+            content: "Note 6 content",
             dates: [],
             archived: false,
             icon: NotesCategory.RANDOM_THOUGHT.toString()
@@ -70,10 +70,10 @@ const initialState: AppState = {
 
         {
             id: 6,
-            name: "Pokupki7",
+            name: "Note 7",
             category: NotesCategory.TASK,
-            date_created: "3/5/2021",
-            content: "Pivo pivo pivo",
+            date_created: "01/01/2023 00:07:00",
+            content: "Note 7 content",
             dates: [],
             archived: false,
             icon: NotesCategory.TASK.toString()
@@ -112,7 +112,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
             const minutes: string = currentDateTime.getMinutes().toString().padStart(2, '0');
             const seconds: string = currentDateTime.getSeconds().toString().padStart(2, '0');
 
-            const currentDateTimeString: string = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+            const currentDateTimeString: string = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 
             const foundDates = findDatesInNote(action.payload.content);
             return {

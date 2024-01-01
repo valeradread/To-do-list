@@ -35,14 +35,16 @@ class NotesTableContainer extends React.Component<NotesTableProps> {
             let notArchivedNotes = this.props.notes.filter((n: Note) => !n.archived)
             props = {
                 ...this.props,
-                notes: notArchivedNotes
+                notes: notArchivedNotes,
+                no_notes: 'Add some notes!'
             }
 
         } else {
             let ArchivedNotes = this.props.notes.filter((n: Note) => n.archived)
             props = {
                 ...this.props,
-                notes: ArchivedNotes
+                notes: ArchivedNotes,
+                no_notes: 'No archived notes.'
             }
 
         }

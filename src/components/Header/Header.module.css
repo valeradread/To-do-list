@@ -23,6 +23,7 @@
     border-radius: 4px;
     color: #287ecf;
     text-align: center;
+    cursor: pointer;
 }
 
 .dropdown:focus {
